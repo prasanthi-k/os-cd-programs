@@ -1,0 +1,119 @@
+#include<stdio.h>
+
+void main()
+
+{
+
+int np,hits,faults,nf,i,j,k,l,pi,found,min;
+
+printf("enter the number of pages and frames ");
+
+scanf("%d%d",&np,&nf);
+
+int p[np],table[nf][np];
+
+int f[nf],priority[nf];
+
+for(k=0;k<nf;k++){
+
+f[k]=-1;priority[k]=-1;}
+
+i=0;
+
+min=-1;
+
+j=0;
+
+pi=0;
+
+hits=0;
+
+faults=0;
+
+while(i!=np)
+
+{found=0;
+
+scanf("%d",&p[i]);
+
+for(k=0;k<nf;k++)
+
+{
+
+if(f[k]==p[i])
+
+{
+
+found=1;
+
+priority[k]=++pi;
+
+hits++;
+
+break;
+
+}
+
+}
+
+if(found==0)
+
+{
+
+faults++;
+
+min=priority[0];
+
+j=0;
+
+   for(k=1;k<nf;k++)
+
+   {
+
+   	if(min>priority[k])   	{
+
+   	min=priority[k];
+
+   	j=k;
+
+}
+
+}
+
+priority[j]=++pi;
+
+f[j++]=p[i];
+
+}
+
+for(l=0;l<nf;l++)
+
+{
+
+table[l][i]=f[l];
+
+}
+
+i++;
+
+}
+
+printf("no of hits,faults= %d %d \n",hits,faults);
+
+for(k=0;k<nf;k++)
+
+{
+
+for(l=0;l<np;l++)
+
+{
+
+printf("%d ",table[k][l]);
+
+}
+
+printf("\n");
+
+}	
+
+}
