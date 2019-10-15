@@ -1,0 +1,174 @@
+#include<stdio.h>
+
+int main()
+
+{
+
+int nr,sc,uc,p,r[10],temp,all[10][10],max[10][10],need[10][10],temp2,i,j,k,c,m,safe[10],unsafe[10],tr;
+
+int avail[10]={0};
+
+temp=0;
+
+printf("enter the no of resources and process :");
+
+scanf("%d%d",&nr,&p);
+
+printf("enter the %d resources instances : ",nr);
+
+for(i=0;i<nr;i++)scanf("%d",&r[i]);
+
+printf("enter the allocation table :");
+
+for(i=0;i<p;i++)
+
+{
+
+printf("\nenter the resources allocated and max required for process %d :",i+1);
+
+for(j=0;j<nr;j++)
+
+{
+
+scanf("%d",&all[i][j]);
+
+avail[j]+=all[i][j];
+
+}
+
+for(j=0;j<nr;j++)
+
+{
+
+scanf("%d",&max[i][j]);
+
+need[i][j]=max[i][j]-all[i][j];
+
+
+}
+
+}
+
+for(i=0;i<nr;i++)
+
+{
+
+avail[i]=r[i]-avail[i];
+
+printf("\n %d",avail[i]);
+
+     
+
+}
+/* in the first iteration of the while loop it has to check
+all the process and from next iteration only
+the process which were unsafe are checked so to know that it is
+not first iteration we use a flag value c  */
+ 
+
+uc=p;
+
+sc=0;
+
+i=0;
+
+tr=0;
+
+c=0;m=0;
+
+temp2=0;
+
+while(uc!=0)
+
+{
+
+temp2++;
+
+
+
+for(j=0;j<nr;j++)
+
+{
+
+if(need[i][j]>r[j])
+
+{
+
+printf(" \n not applicable:");
+
+break;
+
+}
+
+if(need[i][j]<=avail[j])
+
+{
+
+temp++;
+// here the temp value must be equal to number of resources ie no of times condition is satisfied
+}
+
+if(j+1==nr)
+
+{
+
+if(temp==nr){
+
+sc++;
+
+uc--;
+
+printf(" safe %d ",i+1);
+
+safe[sc-1]=i+1;
+
+for(k=0;k<nr;k++)avail[k]+=all[i][k];
+
+}
+
+else
+
+{
+
+unsafe[tr++]=i;
+// tr is the index in unsafe sequence
+
+
+}
+
+}
+
+}
+
+temp=0;
+
+if(c==0)i++;
+
+if(i==p||c==1)
+
+{
+
+c=1;
+
+i=unsafe[m++];
+
+}
+
+}
+
+printf("\nsafe sequence: ");
+
+for(i=0;i<p;i++)
+
+{
+
+printf("%d ",safe[i]);
+
+}
+
+return 0;
+
+}
+
+
+
