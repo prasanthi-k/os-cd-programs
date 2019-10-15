@@ -1,0 +1,137 @@
+#include<stdio.h>
+
+void main()
+
+{
+
+int size,b[10],i,total,at[10],p[10],n,j,pk[10],count,sum,l,t,f;
+
+t=0;f=0;
+
+      sum=0;
+
+count=0;
+
+total=0;i=0;
+
+printf("enter the total size of the stack :");
+
+scanf("%d",&size);
+
+printf("enter the varied sizes of the blocks in stack:");
+
+while(total<size)
+
+{
+
+at[i]=0;
+
+scanf("%d",&b[i]);
+
+total=total+b[i++];
+
+}
+
+count=i;
+
+printf("enter the number of process: ");
+
+scanf("%d",&n);
+
+printf("enter the space rquired of process: ");
+
+for(i=0;i<n;i++)
+
+{
+
+pk[i]=0;
+
+  scanf("%d",&p[i]);
+
+}
+
+i=0;
+
+while(t<n)
+
+{
+
+for(j=0;j<count;j++)
+
+{
+
+if(at[j]==0&&p[i]<=b[j]&&pk[i]==0)
+
+{
+
+at[j]=1;
+
+pk[i]=1;
+
+sum+=b[j]-p[i];
+
+printf("space allocated for %d and total internal fragmentation now is %d : \n",i,sum);
+
+t++;
+
+}
+
+else if(j+1==count&&pk[i]==0)pk[i]=2;
+
+if(pk[i]==2&&f==1)
+
+{
+
+pk[i]=1;
+
+if(p[i]<=sum){
+
+sum=sum-p[i];
+
+printf("space allocated for %d and total  fragmentation now is %d : \n",i,sum);
+
+t++;
+
+}
+
+else
+
+{
+
+printf("no morespace available space not allocated for %d\n",i);
+
+break;
+
+}
+
+}
+
+}
+
+i++;
+
+if(i==n)
+
+{
+
+i=0;
+
+f=1;
+
+          for(l=0;l<count;l++)
+
+{
+
+if(at[l]==0)
+
+{
+
+sum+=b[l];
+
+}	}
+
+}
+
+}
+
+}
