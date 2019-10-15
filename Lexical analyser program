@@ -1,0 +1,126 @@
+#include<stdio.h>
+
+#include<conio.h>
+
+#include<string.h>
+
+void check(char *s);
+
+char id[100],op[50],funs[100],key[40];
+
+void check(char *s)
+
+{
+
+int i,k,a,j;a=0;j=0;
+
+char kw[32][10]={"auto","int","double","struct","break","else","long","switch","case","enum","register","typedef","char","extend","return","union","const","float","short","unsigned","continue","for","signed","void","default","goto",
+
+"sizeof","volatile","do","if","static","while"} ;
+
+if(s[0]=="_")
+
+{
+
+strcat(id," ");
+
+strcat(id,s);
+
+a=1;
+
+}
+
+else {
+
+for(i=0;i<32;i++)
+
+{
+
+  if(strcmp(s,kw[i])==0)
+
+  { a=1;
+
+   strcat(kw," ");
+
+   strcat(kw,s);
+
+   break;
+
+}
+
+}
+
+if(a==0)
+
+{
+
+for(i=0;i<strlen(s);i++)
+
+{
+
+if((s[i]<=90&&s[i]>=65)||(s[i]>=97&&s[i]<=122)||(s[i]<=57&&s[i]>=48))
+
+{
+
+continue;
+
+}
+
+else{
+
+strcat(op," ");
+
+strcat(op,s[i]);
+
+strcat(id," ");
+
+for(k=j;k<i;k++)
+
+{
+
+strcat(id,s[k]);
+
+}j=i+1;
+
+}
+
+}
+
+void main()
+
+{
+
+int i;
+
+char temp[50],temp1[2];
+
+char s[1000];
+
+gets(s);
+
+for(i=0;i<strlen(s);i++)
+
+{
+
+ if(s[i]==" ")
+
+ {
+
+   check(temp);
+
+   temp1="";
+
+   strcpy(temp,temp1);
+
+ }
+
+ else{
+
+ strcat(temp,s[i]);
+
+ }
+
+ }
+
+  }
+
